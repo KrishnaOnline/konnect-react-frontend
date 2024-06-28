@@ -85,7 +85,7 @@ function Chat() {
                     <p className="text-2xl font-semibold">Go Home</p>
                 </NavLink>
                 <div className="search-users relative">
-                    <div className="flex justify-center border-app border-2 rounded items-center">
+                    <div className="flex w-[315px] justify-center border-app border-2 rounded items-center">
                         <input
                             className="p-1 text-lg rounded"
                             placeholder="Search Users..."
