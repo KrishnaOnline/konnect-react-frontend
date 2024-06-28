@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {z} from "zod";
 import { login } from "../../services/operations/userApis";
 import toast from "react-hot-toast";
@@ -13,6 +13,8 @@ function Login() {
         password: "",
     });
     const [loading, setLoading] = useState(false);
+    const currPath = useLocation().pathname;
+    console.log(currPath);
 
     const LoginSchema = z.object({
         email: z.string().min(5, {message: "Username must be atleast 5 chars"}).refine(s => !s.includes(' '), 'Username must not contain Spaces'),
@@ -39,8 +41,16 @@ function Login() {
         }
     }
 
+    const handleGuestLogin = async () => {
+        const response = dispatch(login({
+            email: "test01",
+            password: "guestuser"
+        }, navigate));
+        console.log(response);
+    }
+
 	return (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex -translate-y-10 items-center justify-center h-screen">
             <div className="-translate-y-[60px]">
                 <p className="mb-1 font-bold text-[45px] text-center text-app">Login</p>
                 <div className="flex flex-col gap-4 shadow-lg border rounded-3xl p-5">
@@ -66,6 +76,21 @@ function Login() {
                         onClick={handleSubmit}
                         disabled={loading}
                     >{loading ? "Logging In..." : "Login"}</button>
+                    {
+                        currPath==="/login/guest" &&
+                        <div>
+                            <div className="flex items-center justify-center gap-2">
+                                <div className="w-3/5 h-[2px] bg-gray-300"></div>
+                                <p>OR</p>
+                                <div className="w-3/5 h-[2px] bg-gray-300"></div>
+                            </div>
+                            <button 
+                                className={`w-full ${loading ? "bg-opacity-75" : ""} border mt-4 p-2 rounded-xl bg-app text-white font-medium text-lg`}
+                                onClick={handleGuestLogin}
+                                disabled={loading}
+                            >{loading ? "Logging In..." : "Guest Login"}</button>
+                        </div>
+                    }
                 </div>
                 <div className="mt-6 text-center">
                     <p>Not Registered Yet?, <Link to={"/signup"} className="text-blue-600 underline"> SignUp</Link></p>

@@ -49,7 +49,7 @@ function Signup() {
     }
 
 	return (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex -translate-y-10 items-center justify-center h-screen">
             <div className="-translate-y-[60px]">
                 <p className="mb-1 font-bold text-[45px] text-center text-app">Sign Up</p>
                 <div className="flex flex-col gap-4 shadow-lg border rounded-3xl p-5">
