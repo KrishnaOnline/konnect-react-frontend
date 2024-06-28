@@ -36,7 +36,7 @@ export const login = (data, navigate) => {
             navigate("/");
         } catch(err) {
             console.log(err);
-            // toast.error(err.response.data.message);
+            toast.error(err.response.data.message);
             toast.error(err.message);
             navigate("/login");
         }
