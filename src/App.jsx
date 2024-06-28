@@ -45,7 +45,7 @@ function App() {
                         </div>
                     }
                 </div>
-                <div>
+                <div className="ml-5">
                     {currPath!=="/chat" && <Search/>}
                 </div>
             </div>}

@@ -87,12 +87,12 @@ function Chat() {
                 <div className="search-users relative">
                     <div className="flex w-[315px] justify-center border-app border-2 rounded items-center">
                         <input
-                            className="p-1 text-lg rounded"
+                            className="p-1 w-5/6 text-lg rounded"
                             placeholder="Search Users..."
                             onChange={(e) => setSearchQ(e.target.value)}
                         />
                         <button
-                            className="border p-1 text-lg bg-app px-2 text-white"
+                            className="border p-1 w-2/6 text-lg bg-app px-2 text-white"
                             onClick={handleSearchUsers}
                         >
                             Search
