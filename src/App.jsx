@@ -32,7 +32,7 @@ function App() {
             <Navbar/>
             {token &&
             <div className="flex justify-between lg:hidden mx-1 mt-5">
-                <div>
+                <div className="ml-2">
                     {
                         currPath!=="/chat" &&
                         <div className="flex lg:hidden flex-col bg-white">

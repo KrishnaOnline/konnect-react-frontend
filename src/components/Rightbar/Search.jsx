@@ -38,16 +38,16 @@ function Search() {
     }, []);
 
 	return (
-        <div className="chat-sidebar w-[350px] mb-5 ml-3">
+        <div className="chat-sidebar w-[350px] mb-5">
             <div className="search-users w-full relative">
-                <div className="flex w-[350px] justify-center border-app border-2 rounded items-center">
+                <div className="flex w-[350px] justify-center border border-gray-300 rounded-2xl items-center">
                     <input
-                        className="p-2 px-3 text-lg rounded w-5/6"
+                        className="p-2 px-3 text-lg rounded-2xl rounded-r-none w-5/6"
                         placeholder="Search Users..."
                         onChange={(e) => setSearchQ(e.target.value)}
                     />
                     <button
-                        className="border p-2 px-3 w-2/6 text-lg bg-app text-white"
+                        className="border p-2 px-3 w-2/6 text-lg bg-app bg-opacity-95 rounded-2xl rounded-l-none text-white"
                         onClick={handleSearchUsers}
                     >
                         Search
