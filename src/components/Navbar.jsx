@@ -55,8 +55,8 @@ function Navbar() {
                     </div>
                     :
                     <div className="flex gap-3">
-                        <Link to={"/signup"} className="border border-black p-2 rounded">SignUp</Link>
-                        <Link to={"/login"} className="border border-black p-2 rounded">Login</Link>
+                        <Link to={"/signup"} className="border bg-app p-2 px-3 text-lg text-white rounded-2xl hover:bg-white hover:text-black hover:border-black">SignUp</Link>
+                        <Link to={"/login"} className="border bg-app p-2 px-3 text-lg text-white rounded-2xl hover:bg-white hover:text-black hover:border-black">Login</Link>
                     </div>
                 }
             </div>
