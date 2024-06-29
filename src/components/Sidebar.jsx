@@ -19,7 +19,7 @@ function Sidebar({setIsSidebarOpen}) {
     const dispatch = useDispatch();
 
 	return (
-        <div className="text-black w-[350px] text-[20px] ml-10 lg:ml-3 pt-5 sticky top-0 h-screen">
+        <div className="text-black w-[350px] text-[20px] ml-10 lg:ml-10 pt-5 sticky top-0 h-screen">
             <div onClick={() => setIsSidebarOpen(false)} className="nav-items w-fit flex flex-col gap-5">
                 <NavLink to={"/"}>
                     <div className="flex items-center gap-5">
