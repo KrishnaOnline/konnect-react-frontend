@@ -15,7 +15,7 @@ function HomePage() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 	return (
-        <div className="flex justify-between gap-5 min-h-screen">
+        <div className="flex justify-between gap-5">
             {
                 currPath!=="/chat" &&
                 <div className="/*w-1/5*/ hidden lg:flex w-[350px] pt-10 /*border border-r-0 border-t-0*/">
