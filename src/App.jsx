@@ -36,8 +36,8 @@ function App() {
                     {
                         currPath!=="/chat" &&
                         <div className="flex lg:hidden flex-col bg-white">
-                            <button className="z-50 mt-0 bg-white" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-                                <IoMenuSharp className="text-5xl"/>
+                            <button className="z-50 pt-1 bg-white" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                                <IoMenuSharp className="text-[40px]"/>
                             </button>
                             <div className={`${isSidebarOpen ? "flex" : "hidden"} absolute z-40 bg-white shadow-lg /*w-1/5*/ h-screen w-[350px] pt-10 /*border border-r-0 border-t-0*/`}>
                                 <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}/>
