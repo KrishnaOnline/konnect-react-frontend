@@ -69,7 +69,7 @@ function Chat() {
     const [isChatSidebarOpen, setIsChatSidebarOpen] = useState(false);
 
     return (
-        <div className="relative flex h-screen flex-col lg:flex-row mx-auto gap-5">
+        <div className="relative flex h-screen pl-8 flex-col lg:flex-row mx-auto gap-5">
             <button
                 className="lg:hidden z-40 p-2 text-black"
                 onClick={() => setIsChatSidebarOpen(!isChatSidebarOpen)}
@@ -154,6 +154,7 @@ function Chat() {
                     )}
                 </div>
             </div>
+            <div className="h-full w-[1px] bg-gray-300"></div>
             {isChatSidebarOpen && (
                 <div
                     className="fixed bg-black z-40 lg:hidden"
@@ -164,7 +165,7 @@ function Chat() {
                 {chat 
                     ? <ChatBox chat={chat} chatId={chat?.id} /> 
                     : <div className="mx-auto flex flex-col items-center justify-center">
-                          <p className="text-3xl mb-5">No Chat Selected</p>
+                          <p className="text-3xl -translate-y-32 mb-5">No Chat Selected</p>
                           <div className="flex lg:hidden flex-col gap-2">
                               {userChats.map((c) =>
                                   c?.users?.map((u) =>

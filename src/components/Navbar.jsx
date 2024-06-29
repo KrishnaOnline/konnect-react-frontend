@@ -34,7 +34,7 @@ function Navbar() {
     }
 
 	return (
-        <div className={`p-2 px-3 /*sticky top-0 z-50*/ bg-white`}>
+        <div className={`p-2 px-3 fixed w-full top-0 z-50 bg-white`}>
             <div className="flex bg-white justify-between items-center p-1 px-2 z-100 sticky w-full h-[70px] top-0">
                 <Link className='sticky top-0 flex items-end' to={"/" /*"https://www.linkedin.com/in/krishna-vamshi-kusuma-11717b213/"*/} /*target='_blank'*/>
                     <img className="h-14" src={Logo}/>
