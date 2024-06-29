@@ -44,6 +44,7 @@ function Chat() {
         }
         const res = await searchUsers(searchQ, token);
         setUsers(res);
+        if(!res.length) toast.error("No Users Found");
         setSearchResultsBox(true); // Show search results when searching
         console.log(users);
     };
