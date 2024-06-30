@@ -95,7 +95,7 @@ function Posts() {
                                                 <p className="text-base">{p?.comments.length} Comments</p>
                                             </button>
                                         </div>
-                                        <button>Save</button>
+                                        <button>{/*"Save"*/}</button>
                                     </div>
                                     <div className={`flex ${openComments[i] ? "" : "hidden"} border-2 border-app mx-6`}>
                                         <input
