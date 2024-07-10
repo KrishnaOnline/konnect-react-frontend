@@ -43,7 +43,7 @@ function Navbar() {
                 </Link>
                 <div className='flex gap-2 md:gap-10 items-center'>
                     {
-                        (currUrl!=="/login" && currUrl!=="/signup")
+                        (currUrl!=="/login" && currUrl!=="/signup" && currUrl!=="/login/guest")
                         &&
                         <Link to={"https://krishnavamshi-portfolio.netlify.app/"} target='_blank'>
                             <button className={`border p-2 px-3 rounded-xl bg-app text-white text-lg md:text-xl hover:bg-white hover:border-black hover:border-2 hover:text-black`}>About Me</button>
