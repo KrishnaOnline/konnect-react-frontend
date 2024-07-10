@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Logo from '../assets/Logo.png'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useLocation, useNavigate} from 'react-router-dom'
 import { getUser, logout } from '../services/operations/userApis';
 import { useEffect, useState } from 'react';
 
@@ -13,6 +13,7 @@ function Navbar() {
     const [user, setUser] = useState(null);
     console.log(token);
     console.log(user);
+    const currUrl = useLocation().pathname;
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const getUserById = async () => {
@@ -41,9 +42,13 @@ function Navbar() {
                     <p className='text-3xl text-[#002456] hidden md:flex font-semibold'>onnect</p>
                 </Link>
                 <div className='flex gap-2 md:gap-10 items-center'>
-                    <Link to={"https://krishnavamshi-portfolio.netlify.app/"} target='_blank'>
-                        <button className='border p-2 px-3 rounded-xl bg-app text-white text-lg md:text-xl hover:bg-white hover:border-black hover:border-2 hover:text-black'>About Me</button>
-                    </Link>
+                    {
+                        (currUrl!=="/login" && currUrl!=="/signup")
+                        &&
+                        <Link to={"https://krishnavamshi-portfolio.netlify.app/"} target='_blank'>
+                            <button className={`border p-2 px-3 rounded-xl bg-app text-white text-lg md:text-xl hover:bg-white hover:border-black hover:border-2 hover:text-black`}>About Me</button>
+                        </Link>
+                    }
                     {
                         token
                         ?
