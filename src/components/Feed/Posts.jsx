@@ -69,7 +69,7 @@ function Posts() {
                                 {
                                     p?.image &&
                                     <img
-                                        className="h-[500px] rounded-3xl"
+                                        className="h-[500px] rounded-3xl object-cover"
                                         src={p?.image}
                                     />
                                 }
@@ -78,7 +78,7 @@ function Posts() {
                                     <video
                                         controls 
                                         autoPlay
-                                        className="h-[500px] object-fill rounded-3xl"
+                                        className="h-[500px] object-cover rounded-3xl"
                                         src={p?.video}
                                     />
                                 }
