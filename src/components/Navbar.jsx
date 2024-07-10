@@ -40,25 +40,30 @@ function Navbar() {
                     <img className="h-14" src={Logo}/>
                     <p className='text-3xl text-[#002456] hidden md:flex font-semibold'>onnect</p>
                 </Link>
-                {
-                    token
-                    ?
-                    <div className='flex items-center gap-5'>
-                        <Link to={`/profile/${user?.id}`} className='flex gap-2 items-center'>
-                            <img
-                                className='h-12'
-                                src={user?.image}
-                            />
-                            <p className='text-xl hidden lg:flex'><span className='text-app'>{user?.firstName}!</span></p>
-                        </Link>
-                        <button className='text-xl text-red-800 font-semibold border-2 p-2 border-red-800 rounded-xl hover:bg-red-800 hover:text-white' onClick={handleLogout}>Logout</button>
-                    </div>
-                    :
-                    <div className="flex gap-3">
-                        <Link to={"/signup"} className="border bg-app p-2 px-3 text-lg text-white rounded-2xl hover:bg-white hover:text-black hover:border-black">SignUp</Link>
-                        <Link to={"/login"} className="border bg-app p-2 px-3 text-lg text-white rounded-2xl hover:bg-white hover:text-black hover:border-black">Login</Link>
-                    </div>
-                }
+                <div className='flex gap-2 md:gap-5'>
+                    <Link to={"https://krishnavamshi-portfolio.netlify.app/"} target='_blank'>
+                        <button className='border p-2 px-3 rounded-xl bg-app text-white text-lg md:text-xl hover:bg-white hover:border-black hover:border-2 hover:text-black'>About Me</button>
+                    </Link>
+                    {
+                        token
+                        ?
+                        <div className='flex items-center gap-5'>
+                            <Link to={`/profile/${user?.id}`} className='flex gap-2 items-center'>
+                                <img
+                                    className='h-12'
+                                    src={user?.image}
+                                />
+                                <p className='text-xl hidden lg:flex'><span className='text-app'>{user?.firstName}!</span></p>
+                            </Link>
+                            <button className='text-xl text-red-800 font-semibold border-2 p-2 border-red-800 rounded-xl hover:bg-red-800 hover:text-white' onClick={handleLogout}>Logout</button>
+                        </div>
+                        :
+                        <div className="flex gap-3">
+                            <Link to={"/signup"} className="border bg-app p-2 px-3 text-lg text-white rounded-2xl hover:bg-white hover:text-black hover:border-black">SignUp</Link>
+                            <Link to={"/login"} className="border bg-app p-2 px-3 text-lg text-white rounded-2xl hover:bg-white hover:text-black hover:border-black">Login</Link>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     );
