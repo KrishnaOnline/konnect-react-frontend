@@ -8,10 +8,12 @@ import { useSelector } from "react-redux";
 
 export const signUp = async (data, navigate) => {
     try {
+        const toastId = toast.loading("Signing Up...");
         const response = await apiConnector("POST", userApi.SIGNUP_API, data);
         if(response.data.error) {
             throw new Error(response.data.message);
         }
+        toast.dismiss(toastId);
         toast.success("Signup Successful");
         navigate("/login");
     } catch(err) {
@@ -24,15 +26,17 @@ export const signUp = async (data, navigate) => {
 export const login = (data, navigate) => {
     return async(dispatch) => {
         try {
+            const toastId = toast.loading("Logging In...");
             const response = await apiConnector("POST", userApi.LOGIN_API, data);
             if(response.data.error) {
                 throw new Error(response.data.message);
             }
-            toast.success("Logged In Successfully");
             dispatch(setToken(response.data.token));
             dispatch(setUser(response.data.user));
             localStorage.setItem("token", JSON.stringify(response.data.token));
             localStorage.setItem("user", JSON.stringify(response.data.user));
+            toast.dismiss(toastId);
+            toast.success("Logged In Successfully");
             navigate("/");
         } catch(err) {
             console.log(err);

@@ -16,6 +16,7 @@ export const userApi = {
 export const postsApi = {
     CREATE_POST: BASE_URL+"/auth/posts",
     GET_ALL_POSTS: BASE_URL+"/posts",
+    GET_PAGINATED_POSTS: BASE_URL+"/posts/paginate",
     LIKE_UNLIKE_POST: BASE_URL+"/auth/posts/like/",  // +postId
     GET_POST_BY_ID: BASE_URL+"/posts/",   // +postId                     // ---
     GET_USERS_POSTS: BASE_URL+"/posts/user/",   // +userId

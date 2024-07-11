@@ -31,6 +31,18 @@ export const getAllPosts = async () => {
     }
 }
 
+export const getPagedPosts = async (pageNo, pageSize) => {
+    try {
+        const response = await apiConnector("GET", postsApi.GET_PAGINATED_POSTS+`?pageNo=${pageNo}&pageSize=${pageSize}`, null, null);
+        if(response.data.error) {
+            throw new Error(response.data.message);
+        }
+        return response.data;
+    } catch(err) {
+        console.log(err.response.data.message);
+    }
+}
+
 export const likeUnlikePost = async (postId, token) => {
     try {
         const response = await apiConnector("PUT", postsApi.LIKE_UNLIKE_POST+postId, null, {
