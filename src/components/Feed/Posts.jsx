@@ -1,27 +1,44 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { commentPost, getAllPosts, getPostById, likeUnlikePost } from "../../services/operations/postApis";
-import { FcLike, FcLikePlaceholder } from "react-icons/fc";
-import { FaRegComment } from "react-icons/fa6";
-import { FaRegHeart, FaHeart } from "react-icons/fa6";
+import { commentPost, getPagedPosts, getPostById, likeUnlikePost } from "../../services/operations/postApis";
+import { FaRegComment, FaRegHeart, FaHeart } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import useIntersectionObserver from "@react-hook/intersection-observer";
 
 function Posts() {
     const { token } = useSelector(state => state.auth);
     const { user } = useSelector(state => state.profile);
     const [posts, setPosts] = useState([]);
+    const [page, setPage] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
     const [openComments, setOpenComments] = useState([]);
     const [commentData, setCommentData] = useState({ content: "" });
+    const loaderRef = useRef(null);
 
-    const getPosts = async () => {
-        const res = await getAllPosts();
-        // setPosts(res);
-        setPosts(res.reverse());
-    }
+    const getPosts = useCallback(async () => {
+        try {
+            const res = await getPagedPosts(page, 15);
+            setPosts(prevPosts => [...prevPosts, ...res]);
+            setHasMore(res.length > 0);
+        } catch(err) {
+            toast.error("Error loading posts");
+        }
+    }, [page]);
+
     useEffect(() => {
         getPosts();
-    }, []);
+    }, [getPosts]);
+
+    const { isIntersecting } = useIntersectionObserver(loaderRef, {
+        threshold: 0.1,
+    });
+
+    useEffect(() => {
+        if (isIntersecting && hasMore) {
+            setPage(prevPage => prevPage + 1);
+        }
+    }, [isIntersecting, hasMore]);
 
     const toggleComment = (index) => {
         const newOpenComments = [...openComments];
@@ -33,102 +50,99 @@ function Posts() {
         try {
             await likeUnlikePost(postId, token);
             const updatedPost = await getPostById(postId);
-            setPosts(posts.map((post, i) => (i===index ? updatedPost : post)));
-        } catch(err) {
+            setPosts(posts.map((post, i) => (i === index ? updatedPost : post)));
+        } catch (err) {
             toast.error("Error liking the Post");
         }
-    }
+    };
 
     const commentHandler = async (postId, index) => {
         try {
             await commentPost(commentData, postId, token);
             const updatedPost = await getPostById(postId);
-            setPosts(posts.map((post, i) => (i===index ? updatedPost : post)));
-        } catch(err) {
+            setPosts(posts.map((post, i) => (i === index ? updatedPost : post)));
+        } catch (err) {
             toast.error("Error commenting on the Post");
         }
-    }
+    };
 
     return (
         <div className="flex flex-col gap-5 w-full">
-            {
-                posts.map((p, i) => (
-                    <div key={p?.id} className="w-full">
-                        <div className="border rounded-lg px-6 p-3">
-                            <Link to={`/profile/${p?.user?.id}`} className="profile-details flex mb-3 items-center gap-2">
+            {posts.map((p, i) => (
+                <div key={p?.id} className="w-full">
+                    <div className="border rounded-lg px-6 p-3">
+                        <Link to={`/profile/${p?.user?.id}`} className="profile-details flex mb-3 items-center gap-2">
+                            <img
+                                className="rounded h-12"
+                                src={p?.user?.image}
+                            />
+                            <div>
+                                <p className="">{p?.user?.firstName + " " + p?.user?.lastName}</p>
+                                <p className="text-gray-500 text-sm">{p?.user?.email}</p>
+                            </div>
+                        </Link>
+                        <div className="flex flex-col">
+                            {p?.image &&
                                 <img
-                                    className="rounded h-12"
-                                    src={p?.user?.image}
+                                    className="h-[500px] rounded-3xl object-cover"
+                                    src={p?.image}
                                 />
-                                <div>
-                                    <p className="">{p?.user?.firstName + " " + p?.user?.lastName}</p>
-                                    <p className="text-gray-500 text-sm">{p?.user?.email}</p>
-                                </div>
-                            </Link>
-                            <div className="flex flex-col">
-                                {
-                                    p?.image &&
-                                    <img
-                                        className="h-[500px] rounded-3xl object-cover"
-                                        src={p?.image}
-                                    />
-                                }
-                                {
-                                    p?.video &&
-                                    <video
-                                        controls 
-                                        autoPlay
-                                        className="h-[500px] object-cover rounded-3xl"
-                                        src={p?.video}
-                                    />
-                                }
-                                <p className="text-lg pl-3 mt-3">{p?.caption}</p>
-                                <div className="flex gap-3 flex-col">
-                                    <div className="flex pl-2 mt-2 justify-between">
-                                        <div className="flex gap-5">
-                                            <button className="flex items-center gap-2" onClick={() => handleLikeUnlike(p?.id, i)}>
-                                                {p?.liked && p?.liked.some(l => l.id===user.id) ? <FaHeart className="text-2xl text-red-500" /> : <FaRegHeart className="text-2xl text-red-500" />}
-                                                <p className="text-base">{p?.liked.length} Likes</p>
-                                            </button>
-                                            <button className="flex items-center gap-2" onClick={() => toggleComment(i)}>
-                                                <FaRegComment className="text-2xl text-app" />
-                                                <p className="text-base">{p?.comments.length} Comments</p>
-                                            </button>
-                                        </div>
-                                        <button>{/*"Save"*/}</button>
-                                    </div>
-                                    <div className={`flex ${openComments[i] ? "" : "hidden"} border-2 border-app mx-6`}>
-                                        <input
-                                            className="w-5/6 p-2"
-                                            placeholder="Comment Here..."
-                                            onChange={e => setCommentData({ content: e.target.value })}
-                                        />
-                                        <button
-                                            className="w-1/6 text-lg bg-app text-white"
-                                            onClick={() => commentHandler(p?.id, i)}
-                                        >
-                                            Send
+                            }
+                            {p?.video &&
+                                <video
+                                    controls
+                                    autoPlay
+                                    className="h-[500px] object-cover rounded-3xl"
+                                    src={p?.video}
+                                />
+                            }
+                            <p className="text-lg pl-3 mt-3">{p?.caption}</p>
+                            <div className="flex gap-3 flex-col">
+                                <div className="flex pl-2 mt-2 justify-between">
+                                    <div className="flex gap-5">
+                                        <button className="flex items-center gap-2" onClick={() => handleLikeUnlike(p?.id, i)}>
+                                            {p?.liked && p?.liked.some(l => l.id === user.id) ? <FaHeart className="text-2xl text-red-500" /> : <FaRegHeart className="text-2xl text-red-500" />}
+                                            <p className="text-base">{p?.liked.length} Likes</p>
+                                        </button>
+                                        <button className="flex items-center gap-2" onClick={() => toggleComment(i)}>
+                                            <FaRegComment className="text-2xl text-app" />
+                                            <p className="text-base">{p?.comments.length} Comments</p>
                                         </button>
                                     </div>
-                                    <div className={`flex flex-col gap-2 ml-5 max-h-[150px] overflow-scroll text-black ${!openComments[i] && "hidden"}`}>
-                                        {
-                                            p?.comments?.map((c) => (
-                                                <Link to={`/profile/${c?.user?.id}`} className="flex items-center gap-2" key={c.id}>
-                                                    <img
-                                                        src={c?.user?.image}
-                                                        className="h-10"
-                                                    />
-                                                    <p>{c?.content}</p>
-                                                </Link>
-                                            ))
-                                        }
-                                    </div>
+                                    <button>{/*"Save"*/}</button>
+                                </div>
+                                <div className={`flex ${openComments[i] ? "" : "hidden"} border-2 border-app mx-6`}>
+                                    <input
+                                        className="w-5/6 p-2"
+                                        placeholder="Comment Here..."
+                                        onChange={e => setCommentData({ content: e.target.value })}
+                                    />
+                                    <button
+                                        className="w-1/6 text-lg bg-app text-white"
+                                        onClick={() => commentHandler(p?.id, i)}
+                                    >
+                                        Send
+                                    </button>
+                                </div>
+                                <div className={`flex flex-col gap-2 ml-5 max-h-[150px] overflow-scroll text-black ${!openComments[i] && "hidden"}`}>
+                                    {p?.comments?.map((c) => (
+                                        <Link to={`/profile/${c?.user?.id}`} className="flex items-center gap-2" key={c.id}>
+                                            <img
+                                                src={c?.user?.image}
+                                                className="h-10"
+                                            />
+                                            <p>{c?.content}</p>
+                                        </Link>
+                                    ))}
                                 </div>
                             </div>
                         </div>
                     </div>
-                ))
-            }
+                </div>
+            ))}
+            <div ref={loaderRef} className="loading-indicator flex justify-center text-2xl pt-5 pb-10">
+                {hasMore ? "Loading more posts..." : "No more posts to load"}
+            </div>
         </div>
     );
 }
