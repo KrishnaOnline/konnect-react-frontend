@@ -3,7 +3,7 @@ import Suggestions from "./Suggestions";
 
 function Rightbar() {
 	return (
-        <div className="flex flex-col mx-2 sticky top-0 h-screen pt-5">
+        <div className="flex flex-col mx-2 fixed pt-32 top-0 h-screen">
             <div className="">
                 <Search/>
             </div>

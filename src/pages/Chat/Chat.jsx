@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { createChat, getUserChats } from "../../services/operations/chatApi";
 import ChatBox from "./ChatBox";
 import { FiMenu } from "react-icons/fi";
+import { IoMenuSharp } from "react-icons/io5";
 
 function Chat() {
     const { token } = useSelector((state) => state.auth);
@@ -69,12 +70,12 @@ function Chat() {
     const [isChatSidebarOpen, setIsChatSidebarOpen] = useState(false);
 
     return (
-        <div className="relative flex h-screen flex-col lg:flex-row mx-auto gap-5">
+        <div className="relative flex h-screen pl-0 md:pl-8 flex-col lg:flex-row mx-auto gap-5">
             <button
                 className="lg:hidden z-40 p-2 text-black"
                 onClick={() => setIsChatSidebarOpen(!isChatSidebarOpen)}
             >
-                <FiMenu className="text-[40px]" />
+                <IoMenuSharp className="text-[40px]" />
             </button>
             <div
                 className={`chat-sidebar w-[350px] items-center flex flex-col pt-5 p-3 bg-white ${
@@ -154,6 +155,7 @@ function Chat() {
                     )}
                 </div>
             </div>
+            <div className="h-full hidden md:flex w-[1px] bg-gray-300"></div>
             {isChatSidebarOpen && (
                 <div
                     className="fixed bg-black z-40 lg:hidden"
@@ -164,7 +166,7 @@ function Chat() {
                 {chat 
                     ? <ChatBox chat={chat} chatId={chat?.id} /> 
                     : <div className="mx-auto flex flex-col items-center justify-center">
-                          <p className="text-3xl mb-5">No Chat Selected</p>
+                          <p className="text-3xl md:-translate-y-32 mb-5">No Chat Selected</p>
                           <div className="flex lg:hidden flex-col gap-2">
                               {userChats.map((c) =>
                                   c?.users?.map((u) =>

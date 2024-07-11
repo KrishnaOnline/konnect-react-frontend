@@ -69,7 +69,7 @@ function Posts() {
                                 {
                                     p?.image &&
                                     <img
-                                        className="h-[500px] rounded-3xl"
+                                        className="h-[500px] rounded-3xl object-cover"
                                         src={p?.image}
                                     />
                                 }
@@ -78,7 +78,7 @@ function Posts() {
                                     <video
                                         controls 
                                         autoPlay
-                                        className="h-[500px] object-fill rounded-3xl"
+                                        className="h-[500px] object-cover rounded-3xl"
                                         src={p?.video}
                                     />
                                 }
@@ -95,7 +95,7 @@ function Posts() {
                                                 <p className="text-base">{p?.comments.length} Comments</p>
                                             </button>
                                         </div>
-                                        <button>Save</button>
+                                        <button>{/*"Save"*/}</button>
                                     </div>
                                     <div className={`flex ${openComments[i] ? "" : "hidden"} border-2 border-app mx-6`}>
                                         <input

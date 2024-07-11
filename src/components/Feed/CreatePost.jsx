@@ -17,6 +17,10 @@ function CreatePost() {
         video: selectedVideo
     });
     const handlePost = async () => {
+        if(!post.caption && !post.image && !post.video) {
+            toast.error("Post Something");
+            return;
+        }
         const res = await createPost(post, token);
         console.log(res);
         // getPosts();

@@ -23,7 +23,7 @@ function HomePage() {
                 </div>
             }
             {/* <div className="w-[1px] bg-gray-300"></div> */}
-            <div className={`/*w-3/5*/ ${useLocation().pathname==="/" ? "w-[700px]" : "w-[100%]"}`}>
+            <div className={`/*w-3/5*/ md:mt-[100px] ${useLocation().pathname==="/" ? "w-[700px]" : "w-[100%]"}`}>
                 <Outlet/>
             </div>
             {/* <Routes>
