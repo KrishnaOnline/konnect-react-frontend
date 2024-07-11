@@ -32,7 +32,7 @@ export const uploadToCloudinary = async (pics, fileType) => {
             const fileData = await res.json();
             console.log("Upload File Response: ", fileData);
             toast.dismiss(toastId);
-            return fileData.url;
+            return fileData.secure_url;
         } catch (error) {
             console.error("Error Uploading File: ", error);
             toast.dismiss(toastId);
