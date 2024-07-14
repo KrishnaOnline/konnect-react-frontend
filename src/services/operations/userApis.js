@@ -29,6 +29,7 @@ export const login = (data, navigate) => {
             const toastId = toast.loading("Logging In...");
             const response = await apiConnector("POST", userApi.LOGIN_API, data);
             if(response.data.error) {
+                toast.dismiss(toastId);
                 throw new Error(response.data.message);
             }
             dispatch(setToken(response.data.token));
