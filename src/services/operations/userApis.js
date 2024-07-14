@@ -1,9 +1,9 @@
 import toast from "react-hot-toast";
-import { apiConnector, AUTH_HEADER } from "../apiConnector"
+import { apiConnector } from "../apiConnector"
 import { userApi } from "../apis";
 import { setToken } from "../../redux/slices/authSlice";
 import { setUser } from "../../redux/slices/profileSlice";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 
 export const signUp = async (data, navigate) => {
@@ -26,17 +26,14 @@ export const signUp = async (data, navigate) => {
 export const login = (data, navigate) => {
     return async(dispatch) => {
         try {
-            const toastId = toast.loading("Logging In...");
             const response = await apiConnector("POST", userApi.LOGIN_API, data);
             if(response.data.error) {
-                toast.dismiss(toastId);
                 throw new Error(response.data.message);
             }
             dispatch(setToken(response.data.token));
             dispatch(setUser(response.data.user));
             localStorage.setItem("token", JSON.stringify(response.data.token));
             localStorage.setItem("user", JSON.stringify(response.data.user));
-            toast.dismiss(toastId);
             toast.success("Logged In Successfully");
             navigate("/");
         } catch(err) {

@@ -33,10 +33,11 @@ function Login() {
             }
         } else {
             setLoading(true);
+            const toastId = toast.loading("Logging In...");
             console.log(res);
             const response = dispatch(login(data, navigate));
-            // const response = await login(data, navigate);
             setLoading(false);
+            toast.dismiss(toastId);
             console.log(response);
         }
     }
