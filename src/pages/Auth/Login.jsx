@@ -56,10 +56,10 @@ function Login() {
                 <p className="mb-1 font-bold text-[45px] text-center text-app">Login</p>
                 <div className="flex flex-col gap-4 shadow-lg border rounded-3xl p-5">
                     <label>
-                        <p className="ml-1 text-lg">Username or Email</p>
+                        <p className="ml-1 text-lg">Username</p>
                         <input
                             className="border border-black rounded p-2 w-[300px]"
-                            placeholder="Enter your Registered Email"
+                            placeholder="Enter your Username"
                             onChange={e => setData({...data, email: e.target.value})}
                         />
                     </label>

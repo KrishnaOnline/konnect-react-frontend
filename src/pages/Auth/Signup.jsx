@@ -70,10 +70,10 @@ function Signup() {
                         />
                     </label>
                     <label>
-                        <p className="ml-1 text-lg">Username or Email</p>
+                        <p className="ml-1 text-lg">Username</p>
                         <input
                             className="border border-black rounded p-2 w-[300px]"
-                            placeholder="Enter your Registered Email"
+                            placeholder="Create a Unique Username"
                             onChange={e => setData({...data, email: e.target.value})}
                         />
                     </label>
