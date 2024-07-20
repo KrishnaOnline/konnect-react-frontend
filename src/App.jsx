@@ -28,7 +28,7 @@ function App() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 	return (
-		<div className="flex flex-col overflow-hidden justify-center /*max-w-[1366px]*/ mx-auto">
+		<div className="flex flex-col container justify-center /*max-w-[1366px]*/ mx-auto">
             <Navbar/>
             {token &&
             <div className="flex justify-between lg:hidden mx-1 mt-5">
