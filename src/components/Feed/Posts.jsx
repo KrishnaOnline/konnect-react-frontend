@@ -67,7 +67,7 @@ function Posts() {
     };
 
     return (
-        <div className="flex flex-col gap-5 w-full">
+        <div className="flex flex-col gap-5 w-full mx-auto">
             {posts.map((p, i) => (
                 <div key={p?.id} className="w-full">
                     <div className="border rounded-lg px-6 p-3">
