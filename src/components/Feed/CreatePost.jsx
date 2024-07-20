@@ -58,7 +58,7 @@ function CreatePost() {
     // }
 
 	return (
-        <div className="flex flex-col border shadow-sm /*border-t-0*/ gap-5 justify-center p-5 bg-white px-10">
+        <div className="flex w-screen lg:w-full flex-col border shadow-sm /*border-t-0*/ gap-5 justify-center p-5 bg-white px-10">
             <div className="">
                 <textarea 
                     className="w-full h-[100px] border-2 border-app p-3 px-4 rounded"
