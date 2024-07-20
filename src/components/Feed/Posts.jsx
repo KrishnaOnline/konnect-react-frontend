@@ -69,7 +69,7 @@ function Posts() {
     return (
         <div className="flex flex-col gap-5 w-full mx-auto">
             {posts.map((p, i) => (
-                <div key={p?.id} className="w-screen">
+                <div key={p?.id} className="w-screen lg:w-full">
                     <div className="border rounded-lg px-6 p-3">
                         <Link to={`/profile/${p?.user?.id}`} className="profile-details flex mb-3 items-center gap-2">
                             <img
