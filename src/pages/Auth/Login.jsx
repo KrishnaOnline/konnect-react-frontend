@@ -43,10 +43,14 @@ function Login() {
     }
 
     const handleGuestLogin = async () => {
+        setLoading(true);
+        const toastId = toast.loading("Logging In...");
         const response = dispatch(login({
             email: "test01",
             password: "guestuser"
         }, navigate));
+        setLoading(false);
+        toast.dismiss(toastId);
         console.log(response);
     }
 
