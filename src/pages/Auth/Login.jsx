@@ -44,7 +44,7 @@ function Login() {
 
     const handleGuestLogin = async () => {
         setLoading(true);
-        const toastId = toast.loading("Logging In...");
+        const toastId = toast.loading("Logging In..., might take time due to free tier server");
         const response = await dispatch(login({
             email: "test01",
             password: "guestuser"

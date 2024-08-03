@@ -37,7 +37,7 @@ function Signup() {
             }
         } else {
             setLoading(true);
-            const toastId = toast.loading("Logging In...");
+            const toastId = toast.loading("Signing Up In..., might take time due to free tier server");
             console.log(res);
             // setData(prev => ({...prev, image: avatarGen.generateRandomAvatar()}));
             // console.log(data);
