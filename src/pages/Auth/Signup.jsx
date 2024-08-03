@@ -37,6 +37,7 @@ function Signup() {
             }
         } else {
             setLoading(true);
+            const toastId = toast.loading("Logging In...");
             console.log(res);
             // setData(prev => ({...prev, image: avatarGen.generateRandomAvatar()}));
             // console.log(data);
@@ -45,6 +46,7 @@ function Signup() {
             const response = await signUp(data, navigate);
             setLoading(false);
             console.log(response);
+            toast.dismiss(toastId);
         }
     }
 

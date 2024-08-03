@@ -35,7 +35,7 @@ function Login() {
             setLoading(true);
             const toastId = toast.loading("Logging In...");
             console.log(res);
-            const response = dispatch(login(data, navigate));
+            const response = await dispatch(login(data, navigate));
             setLoading(false);
             toast.dismiss(toastId);
             console.log(response);
@@ -45,13 +45,13 @@ function Login() {
     const handleGuestLogin = async () => {
         setLoading(true);
         const toastId = toast.loading("Logging In...");
-        const response = dispatch(login({
+        const response = await dispatch(login({
             email: "test01",
             password: "guestuser"
         }, navigate));
         setLoading(false);
-        toast.dismiss(toastId);
         console.log(response);
+        toast.dismiss(toastId);
     }
 
 	return (
@@ -80,7 +80,7 @@ function Login() {
                         className={`${loading ? "bg-opacity-75" : ""} border mt-1 p-2 rounded-xl bg-app text-white font-medium text-lg`}
                         onClick={handleSubmit}
                         disabled={loading}
-                    >{loading ? "Logging In..." : "Login"}</button>
+                    >{ "Login" /*loading ? "Logging In..." : "Login"*/}</button>
                     {
                         currPath==="/login/guest" &&
                         <div>
@@ -93,7 +93,7 @@ function Login() {
                                 className={`w-full ${loading ? "bg-opacity-75" : ""} border mt-4 p-2 rounded-xl bg-app text-white font-medium text-lg`}
                                 onClick={handleGuestLogin}
                                 disabled={loading}
-                            >{loading ? "Logging In..." : "Guest Login"}</button>
+                            >{ "Guest Login" /*loading ? "Logging In..." : "Guest Login"*/}</button>
                         </div>
                     }
                 </div>
