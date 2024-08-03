@@ -33,7 +33,7 @@ function Login() {
             }
         } else {
             setLoading(true);
-            const toastId = toast.loading("Logging In...");
+            const toastId = toast.loading("Logging In..., might take time due to free tier server");
             console.log(res);
             const response = await dispatch(login(data, navigate));
             setLoading(false);
