@@ -18,7 +18,7 @@ function Posts() {
 
     const getPosts = useCallback(async () => {
         try {
-            const res = await getPagedPosts(page, 15);
+            const res = await getPagedPosts(page, 5);
             setPosts(prevPosts => [...prevPosts, ...res]);
             setHasMore(res.length > 0);
         } catch(err) {
