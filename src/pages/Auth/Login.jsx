@@ -33,7 +33,7 @@ function Login() {
             }
         } else {
             setLoading(true);
-            const toastId = toast.loading("Logging In..., might take time due to free tier server");
+            const toastId = toast.loading("Logging In, it might take time due to FREE Tier server");
             console.log(res);
             const response = await dispatch(login(data, navigate));
             setLoading(false);
@@ -44,7 +44,7 @@ function Login() {
 
     const handleGuestLogin = async () => {
         setLoading(true);
-        const toastId = toast.loading("Logging In..., might take time due to free tier server");
+        const toastId = toast.loading("Logging In, it might take time due to FREE Tier server");
         const response = await dispatch(login({
             email: "test01",
             password: "guestuser"
